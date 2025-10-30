@@ -1,14 +1,15 @@
 <template>
-  <CochesComponent />
+  <MenuComponent />
+  <router-view></router-view>
 </template>
 
 <script>
-import CochesComponent from "./components/CochesComponent.vue";
+import MenuComponent from "./components/MenuComponent.vue";
 
 export default {
   name: "App",
   components: {
-    CochesComponent,
+    MenuComponent,
   },
 };
 </script>
@@ -20,6 +21,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
 }
 </style>
