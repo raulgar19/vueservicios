@@ -33,6 +33,26 @@
               >Empleados</router-link
             >
           </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Oficios
+            </a>
+            <ul class="dropdown-menu">
+              <li v-for="oficio in oficios" :key="oficio">
+                <router-link
+                  class="dropdown-item"
+                  :to="'/empleadosOficios/' + oficio"
+                  >{{ oficio }}</router-link
+                >
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -40,8 +60,27 @@
 </template>
 
 <script>
+import ServiceEmpleados from "@/services/ServiceEmpleado";
+
+const service = new ServiceEmpleados();
+
 export default {
   name: "MenuComponent",
+  data() {
+    return {
+      oficios: [],
+    };
+  },
+  methods: {
+    loadOficios() {
+      service.getOficios().then((result) => {
+        this.oficios = result;
+      });
+    },
+  },
+  mounted() {
+    this.loadOficios();
+  },
 };
 </script>
 

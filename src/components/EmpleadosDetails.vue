@@ -60,10 +60,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import Global from "../Global";
+import ServiceEmpleados from "@/services/ServiceEmpleado";
 
-let url = Global.urlApiEmpleados;
+const service = new ServiceEmpleados();
 
 export default {
   name: "EmpleadosDetails",
@@ -76,21 +75,14 @@ export default {
   },
   methods: {
     loadEmpleados() {
-      var request = "api/empleados";
-
-      axios.get(url + request).then((response) => {
-        console.log("Obteniendo empleados...");
-
-        this.empleados = response.data;
+      service.getEmpleados().then((result) => {
+        this.empleados = result;
       });
     },
 
     getEmpleado() {
-      var request = "api/empleados/" + this.idEmpleado;
-
-      axios.get(url + request).then((response) => {
-        console.log("Obteniendo detalles del empleado...");
-        this.empleado = response.data;
+      service.getEmpleado(this.idEmpleado).then((result) => {
+        this.empleado = result;
       });
     },
   },
